@@ -1,15 +1,23 @@
 using UnityEngine;
 using System.Collections;
 
+
 public class Story1 : MonoBehaviour {
 
+	public TextAsset storyFile;
 	public GUISkin guiSkin;
 	public GUISkin guiSkin2;
+	
+	//change backgrounds to an array
+	public Texture2D[] _background;
 	public Texture2D background;
 	public Texture2D background2;
 	public Texture2D background3;
-	public TextAsset storyFile;
 	public Texture arrowHead;
+	
+	//use array as pictures
+	public Texture[] picture;
+	
 	public Texture hKing;
 	public Texture hPrince;
 	public Texture hSoldier;
@@ -28,6 +36,9 @@ public class Story1 : MonoBehaviour {
 	}
 	
 	private void OnGUI() {
+		Texture arrowhead = Resources.Load("arrowhead") as Texture;
+		
+		
 		if (background != null && ctr <= 15) {
 			GUI.skin = guiSkin;
 	        GUI.DrawTexture(new Rect(0,0,Screen.width , Screen.height),background);
@@ -41,8 +52,14 @@ public class Story1 : MonoBehaviour {
 			GUI.DrawTexture(new Rect(0,0,Screen.width , Screen.height),background3);
 		}
 		
-		string dialog = storyLines1[ctr];;
 		
+		char[] temp={':'};
+		string nameTalker = storyLines1[ctr].Split(temp,2)[0];
+		string dialog = storyLines1[ctr].Split(temp,2)[1];
+		
+		//change this to a loop to make the code generic
+		
+		//the rectangle width must be large
 		switch(ctr){
 			case 0:
 				GUI.DrawTexture(new Rect(20,120,200,400),hKing);
